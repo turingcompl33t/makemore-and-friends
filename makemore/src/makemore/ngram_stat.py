@@ -13,7 +13,7 @@ _TOKEN_DOT = "."
 
 
 class StatisticalNGram:
-    def __init__(self, *, n: int, smoothing: int = 0) -> None:
+    def __init__(self, n: int, *, smoothing: int = 0) -> None:
         # the size the ngrams
         self.n = n
         # the amount of smoothing to apply (fake counts)

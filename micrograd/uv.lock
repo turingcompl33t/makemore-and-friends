@@ -539,6 +539,11 @@ dependencies = [
     { name = "torch" },
 ]
 
+[package.dev-dependencies]
+qa = [
+    { name = "isort" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "black", extras = ["jupyter"], specifier = ">=25.9.0" },
@@ -551,6 +556,9 @@ requires-dist = [
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "torch", specifier = ">=2.9.0" },
 ]
+
+[package.metadata.requires-dev]
+qa = [{ name = "isort", specifier = ">=7.0.0" }]
 
 [[package]]
 name = "mpmath"
