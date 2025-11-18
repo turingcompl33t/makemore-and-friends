@@ -30,4 +30,4 @@ def topological_sort(n: Node) -> list[Node]:
             topo.append(v)
 
     build_topo(n)
-    return [n for n in reversed(topo)]
+    return topo

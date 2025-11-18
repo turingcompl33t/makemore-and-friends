@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import math
+import typing
+
+from micrograd.util.graph import topological_sort
 
 
 class Value:
@@ -96,18 +99,7 @@ class Value:
         return out
 
     def backward(self) -> None:
-        topo: list[Value] = []
-        visited = set()
-
-        def build_topo(v):
-            if v not in visited:
-                visited.add(v)
-                for child in v._prev:
-                    build_topo(child)
-                topo.append(v)
-
-        build_topo(self)
-
         self.grad = 1.0
-        for node in reversed(topo):
+        for node in reversed(topological_sort(self)):
+            node = typing.cast(Value, node)
             node._backward()
