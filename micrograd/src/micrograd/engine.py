@@ -5,20 +5,24 @@ import math
 
 class Value:
     def __init__(self, data, _children=(), _op="", label=""):
+        # the data maintained by this object
         self.data = data
+        # the gradient of the output of the graph w.r.t this node
         self.grad = 0.0
-        self._backward = lambda: None
-        self._prev = set(_children)
-        self._op = _op
+        # a human-readable label for this node
         self.label = label
+
+        # the function for computing the local gradient
+        self._backward = lambda: None
+        # the anscestors of this node in the graph
+        self._prev = set(_children)
+        # the operation used to compute this node
+        self._op = _op
 
     def __repr__(self) -> str:
         return f"Value(data={self.data})"
 
-    def __neg__(self) -> Value:
-        return self * -1
-
-    def __add__(self, other: Value | int | float) -> Value:
+    def __add__(self, other: float | int | Value) -> Value:
         other = other if isinstance(other, Value) else Value(other)
 
         out = Value(self.data + other.data, (self, other), "+")
@@ -32,9 +36,6 @@ class Value:
 
     def __radd__(self, other: Value | int | float) -> Value:
         return self + other
-
-    def __sub__(self, other: Value | int | float) -> Value:
-        return self + (-other)
 
     def __mul__(self, other: Value | int | float) -> Value:
         other = other if isinstance(other, Value) else Value(other)
@@ -50,6 +51,12 @@ class Value:
 
     def __rmul__(self, other: Value | int | float) -> Value:
         return self * other
+
+    def __neg__(self) -> Value:
+        return self * -1
+
+    def __sub__(self, other: Value | int | float) -> Value:
+        return self + (-other)
 
     def __pow__(self, other: int | float) -> Value:
         assert isinstance(other, (int, float)), "broken precondition"
