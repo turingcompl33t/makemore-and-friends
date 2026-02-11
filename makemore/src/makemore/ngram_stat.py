@@ -30,7 +30,7 @@ class StatisticalNGram:
 
         # the model (conditioning x prediction matrix)
         self.P: torch.Tensor | None = None
-
+        # un-normalized counts
         self.N: torch.Tensor | None = None
 
     def train(self, words: list[str]) -> None:
