@@ -47,10 +47,13 @@ class StatisticalNGram:
             ir = self.alphabet[p]
             N[il, ir] += 1
 
+        # apply smoothing
+        N += self.smoothing
+
         self.N = N
 
         # normalize counts to probability distribution
-        P = (N + self.smoothing).float()
+        P = N.float()
         P /= P.sum(1, keepdim=True)
         self.P = P
 
