@@ -40,11 +40,16 @@ def train(
     lr_schedule: Callable[[int], float] | None = None,
     seed: int = 1337,
 ) -> list[float]:
-    """Train a model on a corpus, returning the per-step loss history.
-
-    A `batch_size` of None trains against the full dataset at each step.
-    `lr_schedule` maps a step index to a learning rate; when omitted, the
+    """
+    Train a model on a corpus, returning the per-step loss history.
+    :param model: The model
+    :param words: The words on which to train
+    :param opt: The optimizer
+    :param steps: The number of steps for which to train
+    :param batch_size: The minibatch size;  A `batch_size` of None trains against the full dataset at each step.
+    :param lr_schedule: Maps a step index to a learning rate; when omitted, the
     optimizer's learning rate is left alone.
+    :return: Per-step loss history
     """
     X, Y = make_dataset(words, model.vocab, model.block_size)
     g = torch.Generator().manual_seed(seed)

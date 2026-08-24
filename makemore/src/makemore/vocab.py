@@ -14,8 +14,7 @@ class Vocab:
     def __init__(self, chars: Sequence[str]) -> None:
         if TOKEN_BOUNDARY in chars:
             raise ValueError(
-                f"boundary token {TOKEN_BOUNDARY!r} is implicit; it should "
-                "not appear in the character set"
+                f"boundary token {TOKEN_BOUNDARY!r} is implicit; it should not appear in the character set"
             )
 
         # index-to-string

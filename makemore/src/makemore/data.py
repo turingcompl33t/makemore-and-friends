@@ -20,7 +20,7 @@ def make_dataset(
     ys: list[int] = []
 
     for word in words:
-        context = [0] * block_size
+        context = [vocab.stoi[TOKEN_BOUNDARY]] * block_size
         for ch in list(word) + [TOKEN_BOUNDARY]:
             ix = vocab.stoi[ch]
             xs.append(context)
