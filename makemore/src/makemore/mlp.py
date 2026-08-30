@@ -17,11 +17,10 @@ class MLP(CharLM):
         *,
         embedding_dimension: int = 2,
         hidden_layer_size: int = 100,
-        seed: int = 1337
+        block_size: int = 3,
+        seed: int = 1337,
     ) -> None:
-        # NOTE(Kyle): the block size is not currently configurable
-        self.block_size = 3
-        super().__init__(vocab, block_size=self.block_size)
+        super().__init__(vocab, block_size=block_size)
 
         # the character embedding dimension
         self.embedding_dimension = embedding_dimension
